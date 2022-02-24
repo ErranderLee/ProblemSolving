@@ -1,14 +1,10 @@
 import sys
 
-n, k = list(map(int, input().split()))
-K = k
-number = sys.stdin.readline().rstrip()
-stack = []
+n = int(input())
+arr = []
+for i in range(n):
+    arr.append(list(map(int, sys.stdin.readline().rstrip().split())))
+answer = []
 
-for num in number:
-    while k > 0 and stack and stack[-1] < num:
-        stack.pop()
-        k -= 1
-    stack.append(num)
-
-print("".join(stack[:n-K]))
+for item in arr:
+    while True:
