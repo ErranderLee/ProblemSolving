@@ -1,5 +1,4 @@
 from collections import defaultdict
-import heapq
 
 
 def solution(genres, plays):
@@ -13,19 +12,20 @@ def solution(genres, plays):
         sum = 0
         for id, play_count in genre_songs[key]:
             sum += play_count
-        heapq.heappush(comparison_plays_count, (-sum, key))
+        comparison_plays_count.append((sum, key))
 
-    while comparison_plays_count:
-        sum_minus, key = heapq.heappop(comparison_plays_count)
+    comparison_plays_count.sort(key= lambda x: -x[0])
+
+    for sum_minus, key in comparison_plays_count:
         comparison_songs_count_and_id = []
         for id, play_count in genre_songs[key]:
-            heapq.heappush(comparison_songs_count_and_id, (-play_count, id))
-
+            comparison_songs_count_and_id.append((play_count, id))
+        comparison_songs_count_and_id.sort(key= lambda x : (-x[0], x[1]))
         if len(comparison_songs_count_and_id) == 1:
-            answer.append(heapq.heappop(comparison_songs_count_and_id)[1])
+            answer.append(comparison_songs_count_and_id[0][1])
         else:
-            answer.append(heapq.heappop(comparison_songs_count_and_id)[1])
-            answer.append(heapq.heappop(comparison_songs_count_and_id)[1])
+            answer.append(comparison_songs_count_and_id[0][1])
+            answer.append(comparison_songs_count_and_id[1][1])
 
     return answer
 
