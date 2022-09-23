@@ -19,6 +19,7 @@ def dijikstra(start, fares_list, node_graph, n):
                 heapq.heappush(q, (cost, next))
     return dists
 
+
 def solution(n, s, a, b, fares):
     answer = 0
     fares_list = [[0 for i in range(n + 1)] for j in range(n + 1)]
